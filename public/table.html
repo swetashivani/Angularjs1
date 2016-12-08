@@ -1,0 +1,96 @@
+<html>
+   
+   <head>
+      <title>Angular JS Table</title>
+      <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+      
+      <style>
+         table, th , td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+         }
+         
+         table tr:nth-child(odd) {
+            background-color: #f2f2f2;
+         }
+         
+         table tr:nth-child(even) {
+            background-color: #ffffff;
+         }
+      </style>
+      
+   </head>
+   <body>
+      <h2>Weekend Cost Estimation</h2>
+      <div ng-app = "mainApp" ng-controller = "personController">
+         
+         <table border = "0">
+            <tr>
+               <td>Enter first name:</td>
+               <td><input type = "text" ng-model = "person.firstName"></td>
+            </tr>
+            
+            <tr>
+               <td>Enter last name: </td>
+               <td>
+                  <input type = "text" ng-model = "person.lastName">
+               </td>
+            </tr>
+            
+            <tr>
+               <td>Name: </td>
+               <td>{{person.fullName()}}</td>
+            </tr>
+            
+            <tr>
+               <td>Money to pay:</td>
+					
+               <td>
+                  <table>
+                     <tr>
+                        <th>Name</th>
+                        <th>Cost</th>
+                     </tr>
+                     
+                     <tr ng-repeat = "cost in person.xperson">
+                        <td>{{ cost.name }}</td>
+                        <td>{{cost.costs }}</td>
+                     </tr>
+							
+                  </table>
+               </td>
+					
+            </tr>
+         </table>
+         
+      </div>
+      
+      <script>
+         var mainApp = angular.module("mainApp", []);
+         
+         mainApp.controller('personController', function($scope) {
+            $scope.person = {
+               firstName: "Sweta",
+               lastName: "Shivani",
+               fees:500,
+               
+               xperson:[
+                  {name:'Praveen',costs:70},
+                  {name:'Karthik',costs:80},
+                  {name:'Manasa',costs:65},
+                  {name:'Gautam',costs:75},
+                  {name:'Aditya',costs:67}
+               ],
+               
+               fullName: function() {
+                  var personObject;
+                  personObject = $scope.person;
+                  return personObject.firstName + " " + personObject.lastName;
+               }
+            };
+         });
+      </script>
+     </body>
+</html>    
+

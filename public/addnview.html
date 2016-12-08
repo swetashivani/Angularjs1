@@ -1,0 +1,58 @@
+<html>
+   
+   <head>
+      <title>Angular JS Views</title>
+      <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+      <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+   </head>
+   
+   <body>
+      <h2>Larsen and Toubro</h2>
+      <div ng-app = "mainApp">
+         <p><a href = "#lnttech">L&T Technology</a></p>
+         <p><a href = "#lntinfo">L&T Infotech</a></p>
+         <div ng-view></div>
+         
+         <script type = "text/ng-template" id = "lnttech.html">
+            <h2>L&T Technology </h2>
+            {{message}}
+         </script>
+         
+         <script type = "text/ng-template" id = "lntinfo.html">
+            <h2>L&T Infotech </h2>
+            {{message}}
+         </script>
+      </div>
+      
+      <script>
+         var mainApp = angular.module("mainApp", ['ngRoute']);
+         mainApp.config(['$routeProvider', function($routeProvider) {
+            $routeProvider.
+            
+            when('/lnttech', {
+               templateUrl: 'lnttech.html',
+               controller: 'LnTTechController'
+            }).
+            
+            when('/lntinfo', {
+               templateUrl: 'lntinfo.html',
+               controller: 'LnTInfoController'
+            }).
+            
+            otherwise({
+               redirectTo: '/lnttech'
+            });
+         }]);
+         
+         mainApp.controller('LnTTechController', function($scope) {
+            $scope.message = "This page will be used to display information LnT Technology";
+         });
+         
+         mainApp.controller('LnTInfoController', function($scope) {
+            $scope.message = "This page will be used to display information of LnT Infotech";
+         });
+			
+      </script>
+      
+   </body>
+</html>
